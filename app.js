@@ -1,6 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const layout = require('./views/layout');
+const { db } = require('./models');
+
+db.authenticate().then(() => {
+  console.log('connected to the database');
+});
 
 const app = express();
 
@@ -10,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // sample route
 app.get('/', (req, res, next) => {
-  res.send('<h2>Hello World</h2>');
+  res.send(layout());
 });
 
 const PORT = 1337;
