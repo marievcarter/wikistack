@@ -20,9 +20,9 @@ app.use('/wiki', wiki);
 app.use('/user', user);
 
 // sample route
-// app.get('/', (req, res, next) => {
-//   res.send(layout());
-// });
+app.get('/', (req, res, next) => {
+  res.send(layout());
+});
 
 const PORT = 1337;
 
