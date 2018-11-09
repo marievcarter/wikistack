@@ -2,7 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const layout = require('./views/layout');
-const { db, User, Page } = require('./models');
+const { db } = require('./models');
+const wiki = require('./routes/wiki');
+const user = require('./routes/user');
 
 db.authenticate().then(() => {
   console.log('connected to the database');
@@ -14,16 +16,24 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: false }));
 
-// sample route
-app.get('/', (req, res, next) => {
-  res.send(layout());
-});
+app.use('/wiki', wiki);
+app.use('/user', user);
 
-// sync models
-User.sync();
-Page.sync();
+// sample route
+// app.get('/', (req, res, next) => {
+//   res.send(layout());
+// });
 
 const PORT = 1337;
-app.listen(PORT, () => {
-  console.log(`App listening in port ${PORT}`);
-});
+
+// sync models
+
+const init = async () => {
+  await db.sync({ force: true });
+
+  app.listen(PORT, () => {
+    console.log(`App listening in port ${PORT}`);
+  });
+};
+
+init();
