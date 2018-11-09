@@ -27,7 +27,6 @@ app.get('/', (req, res, next) => {
 const PORT = 1337;
 
 // sync models
-
 const init = async () => {
   await db.sync({ force: true });
 

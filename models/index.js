@@ -3,6 +3,11 @@ const db = new Sequelize('postgres://localhost:5432/wikistack', {
   logging: false,
 });
 
+const generateSlug = title => {
+  // do some tranformation
+  return title.replace(/\s+/g, '_').replace(/\W/g, '');
+};
+
 const Page = db.define('page', {
   title: {
     type: Sequelize.STRING,
