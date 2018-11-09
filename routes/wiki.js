@@ -11,7 +11,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/add', (req, res, next) => {
-  res.send(addPage(req.body.content));
+  res.send(addPage());
 });
 
 module.exports = router;
