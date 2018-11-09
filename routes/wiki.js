@@ -7,6 +7,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  console.log('BODY', req.body);
   res.send('submit a new page to the database');
 });
 
